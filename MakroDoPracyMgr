@@ -8,14 +8,14 @@ Sub CopyRange()
     Const strPath As String = "D:\Studia\PracaMagisterska\GPW\"
     ChDir strPath
     strExtension = Dir("*.xlsx*")                           /*kod wczytuje sprawozdania finansowe z plików excelowskich z podanej ścieżki do arkusza "Master"*/
-    Do While strExtension <> ""                             /*odwołania do "B3", "B22" oraz B26 są w celu wyciągnięcia informacji z arkusza "info" danej spółki o sektorze, klasyfikacji działalności oraz EKD"
+    Do While strExtension <> ""                            
         Set wkbSource = Workbooks.Open(strPath & strExtension)
         With wkbSource
-            .Sheets("YC").Range("D1:Z250").Copy wkbDest.Sheets("Master").Cells(6, Columns.Count).End(xlToLeft).Offset(0, 1)
+            .Sheets("YC").Range("D1:Z250").Copy wkbDest.Sheets("Master").Cells(6, Columns.Count).End(xlToLeft).Offset(0, 1) /*YC oznacza sprawozdanie skonsolidowane roczne*/
             For i = 1 To 22
             .Sheets("Info").Range("B3").Copy wkbDest.Sheets("Master").Cells(1, Columns.Count).End(xlToLeft).Offset(0, 1)
-            .Sheets("Info").Range("B22").Copy wkbDest.Sheets("Master").Cells(2, Columns.Count).End(xlToLeft).Offset(0, 1)
-            .Sheets("Info").Range("B26").Copy wkbDest.Sheets("Master").Cells(3, Columns.Count).End(xlToLeft).Offset(0, 1)
+            .Sheets("Info").Range("B22").Copy wkbDest.Sheets("Master").Cells(2, Columns.Count).End(xlToLeft).Offset(0, 1)  /*odwołania do "B3", "B22" oraz B26 są w celu wyciągnięcia informacji z arkusza "info" danej spółki o sektorze, klasyfikacji działalności oraz EKD*/
+            .Sheets("Info").Range("B26").Copy wkbDest.Sheets("Master").Cells(3, Columns.Count).End(xlToLeft).Offset(0, 1) 
             If i = 22 Then
            .Sheets("Info").Range("B3").Copy wkbDest.Sheets("Master").Cells(1, Columns.Count).End(xlToLeft).Offset(5, 0)
            .Sheets("Info").Range("B3").Copy wkbDest.Sheets("Master").Cells(1, Columns.Count).End(xlToLeft).Offset(1, 0)
